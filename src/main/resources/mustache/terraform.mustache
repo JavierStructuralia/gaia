@@ -1,5 +1,7 @@
 set -e
 
+echo '[gaia] Fork https://github.com/JavierStructuralia/gaia.git'
+
 echo '[gaia] using image {{terraformImage}}'
 
 echo '[gaia] installing curl'
@@ -23,7 +25,12 @@ echo 'terraform {
 }' > backend.tf
 
 echo '[gaia] generating tfvars variable file'
-curl --silent --user {{stateApiUser}}:{{stateApiPassword}} {{externalUrl}}/api/runner/stacks/{{stackId}}.tfvars > gaia.auto.tfvars
+echo '[gaia] stateApiUser {{stateApiUser}}'
+echo '[gaia] stateApiUser {{stateApiPassword}}'
+echo '[gaia] stateApiUser {{externalUrl}}'
+echo '[gaia] stateApiUser {{stackId}}'
+echo '[gaia] curl --silent --user {{stateApiUser}}:{{stateApiPassword}} {{externalUrl}}/api/runner/stacks/{{stackId}}.tfvars > gaia.auto.tfvars'
+curl --user {{stateApiUser}}:{{stateApiPassword}} {{externalUrl}}/api/runner/stacks/{{stackId}}.tfvars > gaia.auto.tfvars
 
 echo '[gaia] running terraform init'
 terraform version
